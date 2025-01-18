@@ -64,7 +64,7 @@ const BaseInput = styled.input`
 
   &:focus {
     box-shadow: none;
-    border-color: ${({ theme }) => theme["green-500a"]};
+    border-color: ${({ theme }) => theme["green-500"]};
   }
 
   &::placeholder {
