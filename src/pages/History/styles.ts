@@ -1,16 +1,17 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const HistoryContainer = styled.main`
   flex: 1;
   padding: 3.5rem;
+
   display: flex;
   flex-direction: column;
 
   h1 {
     font-size: 1.5rem;
-    color: ${({ theme }) => theme["gray-100"]};
+    color: ${(props) => props.theme['gray-100']};
   }
-`;
+`
 
 export const HistoryList = styled.div`
   flex: 1;
@@ -23,10 +24,10 @@ export const HistoryList = styled.div`
     min-width: 600px;
 
     th {
-      background-color: ${({ theme }) => theme["gray-600"]};
+      background-color: ${(props) => props.theme['gray-600']};
       padding: 1rem;
       text-align: left;
-      color: ${({ theme }) => theme["gray-100"]};
+      color: ${(props) => props.theme['gray-100']};
       font-size: 0.875rem;
       line-height: 1.6;
 
@@ -42,8 +43,8 @@ export const HistoryList = styled.div`
     }
 
     td {
-      background-color: ${({ theme }) => theme["gray-700"]};
-      border-top: 4px solid ${({ theme }) => theme["gray-800"]};
+      background-color: ${(props) => props.theme['gray-700']};
+      border-top: 4px solid ${(props) => props.theme['gray-800']};
       padding: 1rem;
       font-size: 0.875rem;
       line-height: 1.6;
@@ -58,31 +59,28 @@ export const HistoryList = styled.div`
       }
     }
   }
-`;
+`
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const STATUS_COLORS = {
-  yellow: "yellow-500",
-  green: "green-500",
-  red: "red-500",
-} as const;
+  yellow: 'yellow-500',
+  green: 'green-500',
+  red: 'red-500',
+} as const
 
-type StatusType = {
-  statuscolor: keyof typeof STATUS_COLORS;
-};
+interface StatusProps {
+  statusColor: keyof typeof STATUS_COLORS
+}
 
-export const Status = styled.td<StatusType>`
+export const Status = styled.span<StatusProps>`
   display: flex;
   align-items: center;
-  gap: 0, 5rem;
+  gap: 0.5rem;
 
   &::before {
-    content: "";
+    content: '';
     width: 0.5rem;
     height: 0.5rem;
-    border-radius: 50%;
-    background: ${({ theme, statuscolor }) =>
-      theme[STATUS_COLORS[statuscolor]]};
-      margin-right: 6px;
+    border-radius: 9999px;
+    background: ${(props) => props.theme[STATUS_COLORS[props.statusColor]]};
   }
-`;
+`
