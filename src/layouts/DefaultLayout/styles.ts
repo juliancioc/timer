@@ -9,4 +9,9 @@ export const LayoutContainer = styled.div`
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 1320px) {
+    height: calc(100vh - 4rem);
+    margin: 2rem auto;
+  }
 `;
