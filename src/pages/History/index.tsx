@@ -1,11 +1,25 @@
 import { useContext } from "react";
 import { HistoryContainer, HistoryList, Status } from "./styles";
-import { CyclesContext } from "../../context/CyclesContext";
+import { CyclesContext, CycleType } from "../../context/CyclesContext";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 export function History() {
   const { cycles } = useContext(CyclesContext);
+
+  console.log(cycles)
+
+  const showStatus = (cycle: CycleType) => {
+    if (cycle.finishedDate) {
+      return <Status statuscolor="green">Concluído</Status>;
+    }
+
+    if (cycle.interruptedDate) {
+      return <Status statuscolor="red">Interrompido</Status>;
+    }
+
+    return <Status statuscolor="yellow">Em andamento</Status>;
+  };
 
   return (
     <HistoryContainer>
@@ -26,21 +40,13 @@ export function History() {
               <tr key={cycle.id}>
                 <td>{cycle.task}</td>
                 <td>{cycle.minutesAmount}</td>
-                <td>{ formatDistanceToNow(cycle.startDate, {
-                  addSuffix: true,
-                  locale: ptBR
-                })}</td>
                 <td>
-                  {cycle.finishDate && (
-                    <Status statusColor="green">Concluído</Status>
-                  )}
-                  {cycle.interruptedDate && (
-                    <Status statusColor="red">Interrompido</Status>
-                  )}
-                  {!cycle.finishDate && (
-                    <Status statusColor="yellow">Em andamento</Status>
-                  )}
+                  {formatDistanceToNow(new Date(cycle.startDate), {
+                    addSuffix: true,
+                    locale: ptBR,
+                  })}
                 </td>
+                <td>{showStatus(cycle)}</td>
               </tr>
             ))}
           </tbody>
